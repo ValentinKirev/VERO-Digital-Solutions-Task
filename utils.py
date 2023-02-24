@@ -2,20 +2,22 @@ import json
 import urllib3
 
 
-def request(method, url, headers, body: dict = {}):
+def my_request(method, url, headers, body: dict = {}, file_name: str = ''):
     http = urllib3.PoolManager()
 
     if body:
         body = json.dumps(body)
 
-    response = http.request(method=method, url=url, body=body, headers=headers)
+    if file_name:
+        with open(file_name) as fp:
+            file_data = fp.read()
+            response = http.request(method=method, url=url, headers=headers,
+                                    fields={
+                                        'filefield': (file_name, file_data),
+                                    })
+    else:
+        response = http.request(method=method, url=url, body=body, headers=headers)
+
     decoded_response = response.data.decode('utf-8')
 
     return decoded_response
-
-
-def get_access_token(method, url, headers, data):
-    response = request(method, url, headers, data)
-    token = json.loads(response)['oauth']['access_token']
-
-    return token
