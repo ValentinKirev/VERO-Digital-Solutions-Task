@@ -3,7 +3,7 @@ import json
 import os
 
 from flask import Flask, request
-from utils import my_request
+from utils import my_request, authorize
 
 app = Flask(__name__)
 
@@ -73,6 +73,7 @@ def handle_csv():
                     colors.append(label_response[0]['colorCode'])
             vehicle['labelColors'] = colors
 
+        # Return json response
         response = json.dumps(filtered_vehicles, indent=4)
         os.remove('downloaded_file.csv')
 
@@ -80,9 +81,7 @@ def handle_csv():
 
 
 if __name__ == '__main__':
-    # Authorize requests to https://api.baubuddy.de with starting of the server
-    server_response = my_request(method="POST", url=endpoints["login_url"], headers=request_headers, body=login_data)
-    access_token = json.loads(server_response)['oauth']['access_token']
-    request_headers["Authorization"] = f"Bearer {access_token}"
+    # Authorize request to https://api.baubuddy.de
+    authorize(endpoints['login_url'], request_headers, login_data)
 
     app.run()
