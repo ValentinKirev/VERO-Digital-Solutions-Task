@@ -19,7 +19,7 @@ Press CTRL+C to quit
 4. In new terminal activate venv and run client script with corresponding arguments see examples bellow:
 - If you want a colored rows in excel result file use command "python client.py -k kurzname info labelIds -c"
 - If you don't want a colored rows use command without -c flag "python client.py -k kurzname info labelIds"
-- Arguments passed after -k in examples above are just a sample you can pass what you need in excel result file as columns
+- Arguments passed after -k in examples above are just a sample, you can pass what you need in excel result file as columns
 
-5. Result excel file will be saved in project folder with name "vehicles_{current_date_separated_with_underscores}.xlsx" after the command from point 4 is done
+5. Result excel file will be saved in the project folder with name "vehicles_{current_date_separated_with_underscores}.xlsx" after the command from point 4 is done
 - Example for result file name if you run the program on 05.03.2023 will be "vehicles_2023_03_05.xlsx"
