@@ -4,17 +4,16 @@ merges them with the .csv flle, and converts them to a formatted excel file.
 
 To run the scripts open terminal in project folder and execute following commands:
 
-1. Make sure your venv is active (you should see "(venv)" before the project path)
-1.1. If venv is not active execute "venv\Scripts\activate" for Windows or "source ./python_env/bin/activate" for Linux
+1. Make sure your venv is active (you should see "(venv)" before the project path). If venv is not active execute "venv\Scripts\activate" for Windows or "source ./venv/bin/activate" for Linux
 
 2.Download the project requirements with command "pip install -r requirements.txt"
 
 3. Run the server.py with command "python server.py" (you should see output in terminal like this:)
 
-* Serving Flask app 'server'
- * Debug mode: off
+Serving Flask app 'server'
+Debug mode: off
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
- * Running on http://127.0.0.1:5000
+Running on http://127.0.0.1:5000
 Press CTRL+C to quit
 
 4. In new terminal activate venv and run client script with corresponding arguments see examples bellow:
