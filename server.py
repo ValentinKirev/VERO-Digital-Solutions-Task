@@ -1,9 +1,8 @@
 import csv
 import json
 import os
-
 from flask import Flask, request
-from utils import my_request, authorize
+from utils import my_request
 
 app = Flask(__name__)
 
@@ -20,8 +19,13 @@ login_data = {
     "password": "1"
 }
 
-request_headers = {
+unauthorized_headers = {
     "Authorization": "Basic QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz",
+    "Content-Type": "application/json"
+}
+
+
+authorized_headers = {
     "Content-Type": "application/json"
 }
 
@@ -30,6 +34,11 @@ request_headers = {
 def handle_csv():
     """Download .csv file from POST request, get resources from https://api.baubuddy.de,
     merge .csv file with those resources, applies filtering, and return JSON as response """
+
+    # Authorize requests to https://api.baubuddy.de
+    server_response = my_request(method="POST", url=endpoints['login_url'], headers=unauthorized_headers, body=login_data)
+    access_token = json.loads(server_response)['oauth']['access_token']
+    authorized_headers["Authorization"] = f"Bearer {access_token}"
 
     # Get info for the file from the request
     file_name = request.files['filefield'].filename
@@ -44,7 +53,7 @@ def handle_csv():
         }, indent=4)
     else:
         # Get active vehicles from https://api.baubuddy.de
-        active_vehicles = json.loads(my_request('GET', endpoints["active_vehicles_url"], request_headers))
+        active_vehicles = json.loads(my_request('GET', endpoints["active_vehicles_url"], authorized_headers))
 
         # Merge downloaded .csv file with active vehicles
         all_vehicles = [vehicle for vehicle in active_vehicles]
@@ -81,7 +90,4 @@ def handle_csv():
 
 
 if __name__ == '__main__':
-    # Authorize request to https://api.baubuddy.de
-    authorize(endpoints['login_url'], request_headers, login_data)
-
     app.run()

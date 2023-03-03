@@ -1,6 +1,5 @@
 import argparse
 import json
-
 import pandas as pd
 from utils import my_request
 from datetime import datetime, date
