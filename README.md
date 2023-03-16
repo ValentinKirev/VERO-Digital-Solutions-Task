@@ -6,7 +6,7 @@ To run the scripts open terminal in project folder and execute following command
 
 1. Make sure your venv is active (you should see "(venv)" before the project path). If venv is not active execute "venv\Scripts\activate" for Windows or "source ./venv/bin/activate" for Linux
 
-2.Download the project requirements with command "pip install -r requirements.txt"
+2. Download the project requirements with command "pip install -r requirements.txt"
 
 3. Run the server.py with command "python server.py" (you should see output in terminal like this:)
 
