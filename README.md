@@ -1,4 +1,4 @@
-# -VERO-Digital-Solutions-Task
+# VERO-Digital-Solutions-Task
 The project allow you to send .csv file to a API server, downloads a certain set of resources, 
 merges them with the .csv flle, and converts them to a formatted excel file.
 
